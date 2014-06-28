@@ -83,6 +83,9 @@ public class FastMath {
 
     /** Napier's constant e, base of the natural logarithm. */
     public static final double E = 2850325.0 / 1048576.0 + 8.254840070411028747e-8;
+	/** Euler–Mascheroni constant */
+	public static final double EULER = 0.57721566490153286060651209008240243104215933593992;
+
 
     /** Index of exp(0) in the array of integer exponentials. */
     static final int EXP_INT_TABLE_MAX_INDEX = 750;
