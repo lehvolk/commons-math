@@ -46,7 +46,7 @@ public class LogisticDistribution extends AbstractRealDistribution {
 	}
 
 	public double density(double x) {
-		double z = 1 / b * (x - mu);
+		double z = (x - mu) / b;
 		double v = FastMath.exp(-z);
 		return 1 / b * v / ((1.0 + v) * (1.0 + v));
 	}

@@ -25,7 +25,6 @@ public class GumbelDistribution extends AbstractRealDistribution {
 	 */
 	public GumbelDistribution(double mu, double beta) {
 		this(new Well19937c(), mu, beta);
-
 	}
 
 	/**
@@ -43,16 +42,13 @@ public class GumbelDistribution extends AbstractRealDistribution {
 
 	public double density(double x) {
 		final double z = (x - mu) / beta;
-		double t = FastMath.exp(-z);
-		return t * FastMath.exp(-t) / FastMath.abs(beta);
+		double t = FastMath.exp(z);
+		return FastMath.exp(z - t) / FastMath.abs(beta);
 	}
 
 	public double cumulativeProbability(double x) {
 		final double z = (x - mu) / beta;
-		if (beta > 0.) {
-			return FastMath.exp(-FastMath.exp(-z));
-		}
-		return -FastMath.expm1(-FastMath.exp(-z));
+		return 1 - FastMath.exp(-FastMath.exp(-z));
 	}
 
 	@Override
@@ -60,14 +56,11 @@ public class GumbelDistribution extends AbstractRealDistribution {
 		if (p < 0.0 || p > 1.0) {
 			throw new OutOfRangeException(p, 0.0, 1.0);
 		} else if (p == 0) {
-			return 0.0;
+			return Double.NEGATIVE_INFINITY;
 		} else if (p == 1) {
 			return Double.POSITIVE_INFINITY;
 		}
-		if (beta > 0.) {
-			return mu - FastMath.log(-FastMath.log(p)) * beta;
-		}
-		return mu - FastMath.log(-FastMath.log1p(-p)) * beta;
+		return mu + FastMath.log(-FastMath.log(1. - p)) * beta;
 	}
 
 	public double getNumericalMean() {

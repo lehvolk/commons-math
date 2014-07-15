@@ -198,7 +198,7 @@
             <li>convergence values are evaluated by the optimizer as unbounded variables,
                 so there will be scales differences when converted to bounded variables,</li>
             <li>in the case of simplex based solvers, the initial simplex should be set up
-                as delta in unbounded variables.</li>
+                as mu in unbounded variables.</li>
           </ul>
           One caveat of penalty adapter is that if start point or start simplex is outside of the allowed
           range, only the penalty function is used, and the optimizer may converge without ever entering
