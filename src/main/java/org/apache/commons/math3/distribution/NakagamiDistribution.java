@@ -4,12 +4,9 @@ import org.apache.commons.math3.exception.NotStrictlyPositiveException;
 import org.apache.commons.math3.exception.NumberIsTooSmallException;
 import org.apache.commons.math3.exception.util.LocalizedFormats;
 import org.apache.commons.math3.random.RandomGenerator;
-import org.apache.commons.math3.random.Well19937a;
 import org.apache.commons.math3.random.Well19937c;
 import org.apache.commons.math3.special.Gamma;
 import org.apache.commons.math3.util.FastMath;
-
-import javax.xml.ws.LogicalMessage;
 
 /**
  * Nakagami distribution implementation
@@ -59,10 +56,10 @@ public class NakagamiDistribution extends AbstractRealDistribution {
 	 */
 	public NakagamiDistribution(RandomGenerator rg, double m, double omega, double inverseAbsoluteAccuracy) {
 		super(rg);
-		if (omega <= 0) {
+		if (m <= 0) {
 			throw new NotStrictlyPositiveException(LocalizedFormats.NOT_POSITIVE_SCALE, omega);
 		}
-		if (m <= 0.5) {
+		if (omega < 0.5) {
 			throw new NumberIsTooSmallException(omega, 0.5, true);
 
 		}

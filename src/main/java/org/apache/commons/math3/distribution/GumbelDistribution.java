@@ -42,13 +42,13 @@ public class GumbelDistribution extends AbstractRealDistribution {
 
 	public double density(double x) {
 		final double z = (x - mu) / beta;
-		double t = FastMath.exp(z);
-		return FastMath.exp(z - t) / FastMath.abs(beta);
+		double t = FastMath.exp(-z);
+		return FastMath.exp(- z - t) / FastMath.abs(beta);
 	}
 
 	public double cumulativeProbability(double x) {
 		final double z = (x - mu) / beta;
-		return 1 - FastMath.exp(-FastMath.exp(-z));
+		return FastMath.exp(-FastMath.exp(-z));
 	}
 
 	@Override
